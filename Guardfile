@@ -1,6 +1,8 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
+notification :on
+
 guard 'cucumber', :cli => '--format pretty' do
   watch(%r{^lib/.+$}) { 'features' }
   watch(%r{^features/.+\.feature$})
