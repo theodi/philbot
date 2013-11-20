@@ -8,7 +8,7 @@ require 'philbot/uploader'
 
 module Philbot
   def self.run watchdir
-    Philbot::Config.root = watchdir
+    Philbot::Config.root = File.expand_path(watchdir)
 
     @@listener = Listen.to watchdir do |modified, added, removed|
 #      puts "modified absolute path: #{modified}"
