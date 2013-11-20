@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "aruba", "~> 0.5"
   spec.add_development_dependency "rspec", "~> 2.14"
   spec.add_development_dependency "resque-mock", "~> 0.1"
+  spec.add_development_dependency "coveralls", "~> 0.7"
 end
