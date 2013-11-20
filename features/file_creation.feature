@@ -2,7 +2,7 @@ Feature: Upload file on create
 
   Scenario: Queue file when created
     Given a directory named "watchme/"
-    Then the upload of file "watchme/file_01" should be queued
+    Then the upload of file "file_01" should be queued
     When the monitor is watching "watchme/"
     And I write to "watchme/file_01" with:
     """
@@ -13,6 +13,6 @@ Feature: Upload file on create
     Scenario: Upload file when queued
       Given a directory named "watchme/"
       And a 512 byte file named "watchme/file_02"
-      And the file upload of "watchme/file_02" has been queued
-      Then the file "watchme/file_02" should be uploaded
+      And the file upload of "file_02" has been queued
+      Then the file "file_02" should be uploaded
       When the queued job is executed

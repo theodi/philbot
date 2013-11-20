@@ -3,7 +3,7 @@ When(/^the monitor is watching "(.*?)"$/) do |directory|
 end
 
 Then(/^the upload of file "(.*?)" should be queued$/) do |filename|
-  Resque.should_receive(:enqueue).with(Philbot::Uploader, [full_path(filename)]).once
+  Resque.should_receive(:enqueue).with(Philbot::Uploader, [filename]).once
 end
 
 When(/^I wait for the monitor to notice$/) do
@@ -12,15 +12,22 @@ end
 
 Given(/^the file upload of "(.*?)" has been queued$/) do |filename|
   @files ||= []
-  @files << full_path(filename)
+  @files << filename
   @job = Philbot::Uploader
 end
 
 Then(/^the file "(.*?)" should be uploaded$/) do |filename|
-  Fog::Storage::Rackspace::Files.any_instance.should_receive(:create) do |options|
+  rackspace = Object.new
+  Fog::Storage.should_receive(:new).and_return(rackspace)
+
+  directory = Object.new
+  rackspace.stub_chain(:directories, :get).and_return(directory)
+
+  directory.stub_chain(:files, :create) do |options|
     options[:key].should == filename
-    options[:body].length.should == 512
+    options[:body].size.should == 512
   end
+
 end
 
 When(/^the queued job is executed$/) do
