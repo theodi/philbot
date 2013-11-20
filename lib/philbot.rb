@@ -11,8 +11,6 @@ module Philbot
     Philbot::Config.root = File.expand_path(watchdir)
 
     @@listener = Listen.to watchdir do |modified, added, removed|
-#      puts "modified absolute path: #{modified}"
-#      puts "removed absolute path: #{removed}"
       if added
 #        puts "added absolute path: #{added}, #{watchdir}"
         Resque.enqueue Philbot::Uploader, added.map{ |i| i.gsub("#{watchdir}/", '')}
