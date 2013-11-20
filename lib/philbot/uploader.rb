@@ -8,7 +8,7 @@ module Philbot
       rackspace = Fog::Storage.new(
           {
               provider:           'Rackspace',
-              rackspace_username: 'raxdemotheodi', #ENV['RACKSPACE_USERNAME'],
+              rackspace_username: 'fake_username', #ENV['RACKSPACE_USERNAME'],
               rackspace_api_key:  'api_key_of_fake', #ENV['RACKSPACE_API_KEY'],
               rackspace_region:   :lon #ENV['RACKSPACE_REGION'].to_sym
           }
