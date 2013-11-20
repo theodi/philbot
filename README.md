@@ -1,24 +1,8 @@
-# Philbot
+[![Code Climate](https://codeclimate.com/github/theodi/philbot.png)](https://codeclimate.com/github/theodi/philbot)
 
-TODO: Write a gem description
+#Philbot
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'philbot'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install philbot
-
-## Usage
-
-TODO: Write usage instructions here
+Cloudfiles client
 
 ## Contributing
 
