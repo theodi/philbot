@@ -9,3 +9,10 @@ Feature: Upload file on create
     DUMMY TEXT
     """
     And I wait for the monitor to notice
+
+    Scenario: Upload file when queued
+      Given a directory named "watchme/"
+      And a 512 byte file named "watchme/file_02"
+      And the file upload of "watchme/file_02" has been queued
+      Then the file "watchme/file_02" should be uploaded
+      When the queued job is executed

@@ -1,7 +1,9 @@
-require "philbot/version"
-require 'philbot/uploader'
 require "resque"
 require 'listen'
+require 'fog'
+
+require "philbot/version"
+require 'philbot/uploader'
 
 module Philbot
   def self.run watchdir

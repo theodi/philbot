@@ -16,3 +16,7 @@ Resque.mock!
 def aruba_tmp
   File.join %w{tmp aruba}
 end
+
+def full_path filename
+  File.expand_path(aruba_tmp + '/' + filename)
+end
