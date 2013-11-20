@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version     = Philbot::VERSION
   spec.authors     = ["pikesley"]
   spec.email       = ["github@orgraphone.org"]
-  spec.description = %q{Philbot}
-  spec.summary     = %q{Philbot}
+  spec.description = %q{Cloudfiles client}
+  spec.summary     = %q{Cloudfiles client}
   spec.homepage    = ""
   spec.license     = "MIT"
 
