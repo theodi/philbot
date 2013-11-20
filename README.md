@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/theodi/philbot.png?branch=master-2013-11-20_16-38-04)](https://travis-ci.org/theodi/philbot)
 [![Code Climate](https://codeclimate.com/github/theodi/philbot.png)](https://codeclimate.com/github/theodi/philbot)
+[![Coverage Status](https://coveralls.io/repos/theodi/philbot/badge.png)](https://coveralls.io/r/theodi/philbot)
 
 #Philbot
 
