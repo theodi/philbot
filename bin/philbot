@@ -1,5 +1,5 @@
 $: << File.expand_path("../lib", File.dirname(__FILE__))
 require 'philbot'
 
-Philbot.run "."
+Philbot.run ARGV[0]
 Philbot.work
