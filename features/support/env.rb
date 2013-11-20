@@ -12,3 +12,7 @@ require 'cucumber/rspec/doubles'
 
 require 'resque/mock'
 Resque.mock!
+
+def aruba_tmp
+  File.join %w{tmp aruba}
+end
