@@ -3,6 +3,9 @@ require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.start
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'aruba/cucumber'
 
 $: << File.expand_path('../../lib', File.dirname(__FILE__))
