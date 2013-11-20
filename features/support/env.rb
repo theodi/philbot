@@ -10,3 +10,5 @@ require 'philbot'
 
 require 'cucumber/rspec/doubles'
 
+require 'resque/mock'
+Resque.mock!
