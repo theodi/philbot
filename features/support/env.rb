@@ -21,5 +21,5 @@ def aruba_tmp
 end
 
 def full_path filename
-  File.expand_path(aruba_tmp + '/' + filename)
+  File.expand_path File.join aruba_tmp, filename
 end
