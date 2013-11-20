@@ -1,8 +1,8 @@
-require "resque"
+require 'resque'
 require 'listen'
 require 'fog'
 
-require "philbot/version"
+require 'philbot/version'
 require 'philbot/config'
 require 'philbot/uploader'
 
@@ -12,9 +12,9 @@ module Philbot
 
     @@listener = Listen.to watchdir do |modified, added, removed|
       if added
-#        puts "added absolute path: #{added}, #{watchdir}"
-        Resque.enqueue Philbot::Uploader, added.map{ |i| i.gsub("#{watchdir}/", '')}
+        Resque.enqueue Philbot::Uploader, added.map{ |i| i.gsub('%s/' % watchdir, '')}
       end
+      # we want to handle the other cases, too
     end
     @@listener.start
   end
