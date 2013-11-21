@@ -25,7 +25,7 @@ Feature: Upload file on change
     DEREK
 
     """
-    And the file upload of "file_03" has been queued
+    And the upload of "file_03" has been queued
     Then the 6 byte file "file_03" should be uploaded
     When the queued job is executed
     And I append to "watchme/file_03" with:
@@ -33,6 +33,6 @@ Feature: Upload file on change
     CLIVE
 
     """
-    And the file upload of "file_03" has been queued
+    And the upload of "file_03" has been queued
     Then the 12 byte file "file_03" should be uploaded
     When the queued job is executed

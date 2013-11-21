@@ -15,7 +15,7 @@ When(/^I wait for the monitor to notice$/) do
   sleep 1
 end
 
-Given(/^the file upload of "(.*?)" has been queued$/) do |filename|
+Given(/^the upload of "(.*?)" has been queued$/) do |filename|
   @files ||= []
   @files << filename
   @job = Philbot::Uploader
