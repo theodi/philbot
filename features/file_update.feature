@@ -18,14 +18,21 @@ Feature: Upload file on change
     """
     And I wait for the monitor to notice
 
-#  Scenario: Update file when changed
-#    Given a directory named "watchme/"
-#    And a 1024 byte file named "watchme/file_03"
-#    And the file upload of "file_03" has been queued
-#    Then the 1024 byte file "file_03" should be uploaded
-#    When the queued job is executed
-#
-#    Given a 2048 byte file named "watchme/file_03"
-#    And the file upload of "file_03" has been queued
-#    Then the 2048 byte file "file_03" should be uploaded
-#    When the queued job is executed
+  Scenario: Update file when changed
+    Given a directory named "watchme/"
+    And a file named "watchme/file_03" with:
+    """
+    DEREK
+
+    """
+    And the file upload of "file_03" has been queued
+    Then the 6 byte file "file_03" should be uploaded
+    When the queued job is executed
+    And I append to "watchme/file_03" with:
+    """
+    CLIVE
+
+    """
+    And the file upload of "file_03" has been queued
+    Then the 12 byte file "file_03" should be uploaded
+    When the queued job is executed
