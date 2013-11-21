@@ -7,7 +7,7 @@ Feature: Upload file on create
     When the monitor is watching "watchme/"
     And I write to "watchme/file_01" with:
     """
-    DUMMY TEXT
+    RICHARD PRYOR
     """
     And I wait for the monitor to notice
 
