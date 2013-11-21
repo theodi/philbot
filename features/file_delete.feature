@@ -1,7 +1,7 @@
 @delete
 Feature: Delete remote file on local delete
 
-  Scenario: Queue file when deleted
+  Scenario: Delete remote file when deleted locally
     Given a directory named "watchme/"
     Then the upload of file "file_04" should be queued
     When the monitor is watching "watchme/"
@@ -17,3 +17,7 @@ Feature: Delete remote file on local delete
     And the deletion of file "file_04" should be queued
     When I remove the file "watchme/file_04"
     And I wait for the monitor to notice
+
+    And the deletion of remote file "file_04" has been queued
+    Then the remote file "file_04" should be deleted
+    When the queued job is executed
