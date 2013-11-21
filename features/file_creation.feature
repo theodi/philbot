@@ -1,3 +1,4 @@
+@create
 Feature: Upload file on create
 
   Scenario: Queue file when created
