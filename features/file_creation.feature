@@ -11,9 +11,9 @@ Feature: Upload file on create
     """
     And I wait for the monitor to notice
 
-    Scenario: Upload file when queued
-      Given a directory named "watchme/"
-      And a 512 byte file named "watchme/file_02"
-      And the file upload of "file_02" has been queued
-      Then the file "file_02" should be uploaded
-      When the queued job is executed
+  Scenario: Upload file when queued
+    Given a directory named "watchme/"
+    And a 512 byte file named "watchme/file_02"
+    And the file upload of "file_02" has been queued
+    Then the 512 byte file "file_02" should be uploaded
+    When the queued job is executed
