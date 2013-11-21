@@ -18,5 +18,6 @@ Feature: Delete remote file on local delete
     When I remove the file "watchme/file_04"
     And I wait for the monitor to notice
 
-    And the remote file "file_04" should be deleted
-#    When the queued job is executed
+    And the deletion of remote file "file_04" has been queued
+    Then the remote file "file_04" should be deleted
+    When the queued job is executed

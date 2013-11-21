@@ -20,6 +20,16 @@ Given(/^the upload of "(.*?)" has been queued$/) do |filename|
   @job = Philbot::Uploader
 end
 
+Given(/^the deletion of remote file "(.*?)" has been queued$/) do |filename|
+  @files ||= []
+  @files << filename
+  @job = Philbot::Destroyer
+end
+
+Then(/^the deletion of file "(.*?)" should be queued$/) do |filename|
+  Resque.should_receive(:enqueue).with(Philbot::Destroyer, [filename]).once
+end
+
 Then(/^the (\d+) byte file "(.*?)" should be uploaded$/) do |size, filename|
   rackspace = Object.new
   Fog::Storage.should_receive(:new).and_return(rackspace)
@@ -33,20 +43,16 @@ Then(/^the (\d+) byte file "(.*?)" should be uploaded$/) do |size, filename|
   end
 end
 
-Then(/^the deletion of file "(.*?)" should be queued$/) do |filename|
-  Resque.should_receive(:enqueue).with(Philbot::Destroyer, [filename]).once
-end
-
 Then(/^the remote file "(.*?)" should be deleted$/) do |filename|
   rackspace = Object.new
-  Fog::Storage.should_receive(:new) #.and_return(rackspace)
+  Fog::Storage.should_receive(:new).and_return(rackspace)
 
-#  directory = Object.new
-#  rackspace.stub_chain(:directories, :get).and_return(directory)
+  directory = Object.new
+  rackspace.stub_chain(:directories, :get).and_return(directory)
 
-#  directory.stub_chain(:files, :delete) do |fname|
-#    fname.should == filename
-#  end
+  directory.stub_chain(:files, :destroy) do |fname|
+    fname.should == filename
+  end
 end
 
 When(/^the queued job is executed$/) do
