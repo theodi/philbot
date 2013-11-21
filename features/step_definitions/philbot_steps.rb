@@ -6,6 +6,11 @@ Then(/^the upload of file "(.*?)" should be queued$/) do |filename|
   Resque.should_receive(:enqueue).with(Philbot::Uploader, [filename]).once
 end
 
+Then(/^the upload of file "(.*?)" should be queued (\d+) times$/) do |filename, count|
+  Resque.should_receive(:enqueue).with(Philbot::Uploader, [filename]).exactly(count.to_i).times
+#  Resque.should_receive(:enqueue).exactly(count.to_i).times
+end
+
 When(/^I wait for the monitor to notice$/) do
   sleep 1
 end
