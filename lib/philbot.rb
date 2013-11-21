@@ -12,14 +12,14 @@ module Philbot
 
     @@listener = Listen.to watchdir do |modified, added, removed|
       unless added.empty?
-        puts "Added: %s" % added.inspect
-        puts "Queuing %s" % added.inspect
+#        puts "Added: %s" % added.inspect
+#        puts "Queuing %s" % added.inspect
         Resque.enqueue Philbot::Uploader, added.map{ |i| i.gsub('%s/' % watchdir, '')}
       end
 
       unless modified.empty?
-        puts "Modified: %s" % modified.inspect
-        puts "Queuing %s" % modified.inspect
+#        puts "Modified: %s" % modified.inspect
+#        puts "Queuing %s" % modified.inspect
         Resque.enqueue Philbot::Uploader, modified.map{ |i| i.gsub('%s/' % watchdir, '')}
       end
       # we want to handle the other cases, too

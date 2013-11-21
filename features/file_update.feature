@@ -7,13 +7,13 @@ Feature: Upload file on change
     When the monitor is watching "watchme/"
     Given a file named "watchme/file_03" with:
     """
-    THIS IS A LINE OF TEXT
+    MORECAMBE
 
     """
     And I wait for the monitor to notice
     And I append to "watchme/file_03" with:
     """
-    THIS IS ANOTHER LINE OF TEXT
+    WISE
 
     """
     And I wait for the monitor to notice
