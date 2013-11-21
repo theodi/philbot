@@ -5,6 +5,7 @@ require 'fog'
 require 'philbot/version'
 require 'philbot/config'
 require 'philbot/uploader'
+require 'philbot/destroyer'
 
 module Philbot
   def self.run watchdir
@@ -12,19 +13,22 @@ module Philbot
 
     @@listener = Listen.to watchdir do |modified, added, removed|
       unless added.empty?
-#        puts "Added: %s" % added.inspect
-#        puts "Queuing %s" % added.inspect
-        Resque.enqueue Philbot::Uploader, added.map{ |i| i.gsub('%s/' % watchdir, '')}
+        Resque.enqueue Philbot::Uploader, mapit(added, watchdir)
       end
 
       unless modified.empty?
-#        puts "Modified: %s" % modified.inspect
-#        puts "Queuing %s" % modified.inspect
-        Resque.enqueue Philbot::Uploader, modified.map{ |i| i.gsub('%s/' % watchdir, '')}
+        Resque.enqueue Philbot::Uploader, mapit(modified, watchdir)
       end
-      # we want to handle the other cases, too
+
+      unless removed.empty?
+        Resque.enqueue Philbot::Destroyer, mapit(removed, watchdir)
+      end
     end
     @@listener.start
+  end
+
+  def self.mapit list, parentdir
+    list.map { |i| i.gsub('%s/' % parentdir, '')}
   end
 
   def self.work
