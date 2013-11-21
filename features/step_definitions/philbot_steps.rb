@@ -16,7 +16,7 @@ Given(/^the file upload of "(.*?)" has been queued$/) do |filename|
   @job = Philbot::Uploader
 end
 
-Then(/^the file "(.*?)" should be uploaded$/) do |filename|
+Then(/^the (\d+) byte file "(.*?)" should be uploaded$/) do |size, filename|
   rackspace = Object.new
   Fog::Storage.should_receive(:new).and_return(rackspace)
 
@@ -25,7 +25,7 @@ Then(/^the file "(.*?)" should be uploaded$/) do |filename|
 
   directory.stub_chain(:files, :create) do |options|
     options[:key].should == filename
-    options[:body].size.should == 512
+    options[:body].size.should == size.to_i
   end
 
 end
