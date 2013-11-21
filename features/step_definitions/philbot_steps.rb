@@ -8,7 +8,6 @@ end
 
 Then(/^the upload of file "(.*?)" should be queued (\d+) times$/) do |filename, count|
   Resque.should_receive(:enqueue).with(Philbot::Uploader, [filename]).exactly(count.to_i).times
-#  Resque.should_receive(:enqueue).exactly(count.to_i).times
 end
 
 When(/^I wait for the monitor to notice$/) do
@@ -32,7 +31,10 @@ Then(/^the (\d+) byte file "(.*?)" should be uploaded$/) do |size, filename|
     options[:key].should == filename
     options[:body].size.should == size.to_i
   end
+end
 
+When(/^the deletion of file "(.*?)" should be queued$/) do |filename|
+  Resque.should_receive(:enqueue).with(Philbot::Destroyer, [filename]).once
 end
 
 When(/^the queued job is executed$/) do
