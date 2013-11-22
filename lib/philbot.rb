@@ -6,6 +6,7 @@ require 'philbot/version'
 require 'philbot/config'
 require 'philbot/workers/uploader'
 require 'philbot/workers/destroyer'
+require 'philbot/providers/rackspace'
 
 module Philbot
   def self.run watchdir
