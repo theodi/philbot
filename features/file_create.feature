@@ -17,3 +17,16 @@ Feature: Upload file on create
     And the upload of "file_02" has been queued
     Then the 512 byte file "file_02" should be uploaded
     When the queued job is executed
+
+  Scenario: Dotfiles should not be uploaded
+    Given a directory named "watchme/"
+    Then the upload of file ".dot_file" should not be queued
+    When the monitor is watching "watchme/"
+    And I write to "watchme/.dot_file" with:
+    """
+    REGGIE WATTS
+    """
+
+  Scenario: Local paths are screwy (it tried to upload /home/odi/home/odi/some/file)
+
+  Scenario: Remote paths are screwy (it uploads just the file, without the parent dirs)

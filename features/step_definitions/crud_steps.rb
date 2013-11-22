@@ -2,8 +2,12 @@ When(/^the monitor is watching "(.*?)"$/) do |directory|
   Philbot.run full_path(directory)
 end
 
-Then(/^the upload of file "(.*?)" should be queued$/) do |filename|
-  Resque.should_receive(:enqueue).with(Philbot::Workers::Uploader, [filename]).once
+Then(/^the upload of file "(.*?)" should( not)? be queued$/) do |filename, boolean|
+  if boolean
+    Resque.should_not_receive(:enqueue).with(Philbot::Workers::Uploader, [filename])
+  else
+    Resque.should_receive(:enqueue).with(Philbot::Workers::Uploader, [filename]).once
+  end
 end
 
 Then(/^the upload of file "(.*?)" should be queued (\d+) times$/) do |filename, count|
