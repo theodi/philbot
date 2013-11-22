@@ -4,8 +4,8 @@ require 'fog'
 
 require 'philbot/version'
 require 'philbot/config'
-require 'philbot/uploader'
-require 'philbot/destroyer'
+require 'philbot/workers/uploader'
+require 'philbot/workers/destroyer'
 
 module Philbot
   def self.run watchdir
@@ -13,15 +13,15 @@ module Philbot
 
     @@listener = Listen.to watchdir do |modified, added, removed|
       unless added.empty?
-        Resque.enqueue Philbot::Uploader, mapit(added, watchdir)
+        Resque.enqueue Philbot::Workers::Uploader, mapit(added, watchdir)
       end
 
       unless modified.empty?
-        Resque.enqueue Philbot::Uploader, mapit(modified, watchdir)
+        Resque.enqueue Philbot::Workers::Uploader, mapit(modified, watchdir)
       end
 
       unless removed.empty?
-        Resque.enqueue Philbot::Destroyer, mapit(removed, watchdir)
+        Resque.enqueue Philbot::Workers::Destroyer, mapit(removed, watchdir)
       end
     end
     @@listener.start

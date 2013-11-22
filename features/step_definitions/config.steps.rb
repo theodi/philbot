@@ -5,3 +5,4 @@ end
 Then(/^looking up "(.*?)" on the object should yield "(.*?)"$/) do |key, value|
   @config[key].should == value
 end
+

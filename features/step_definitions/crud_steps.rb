@@ -3,11 +3,11 @@ When(/^the monitor is watching "(.*?)"$/) do |directory|
 end
 
 Then(/^the upload of file "(.*?)" should be queued$/) do |filename|
-  Resque.should_receive(:enqueue).with(Philbot::Uploader, [filename]).once
+  Resque.should_receive(:enqueue).with(Philbot::Workers::Uploader, [filename]).once
 end
 
 Then(/^the upload of file "(.*?)" should be queued (\d+) times$/) do |filename, count|
-  Resque.should_receive(:enqueue).with(Philbot::Uploader, [filename]).exactly(count.to_i).times
+  Resque.should_receive(:enqueue).with(Philbot::Workers::Uploader, [filename]).exactly(count.to_i).times
 end
 
 When(/^I wait for the monitor to notice$/) do
@@ -17,17 +17,17 @@ end
 Given(/^the upload of "(.*?)" has been queued$/) do |filename|
   @files ||= []
   @files << filename
-  @job = Philbot::Uploader
+  @job = Philbot::Workers::Uploader
 end
 
 Given(/^the deletion of remote file "(.*?)" has been queued$/) do |filename|
   @files ||= []
   @files << filename
-  @job = Philbot::Destroyer
+  @job = Philbot::Workers::Destroyer
 end
 
 Then(/^the deletion of file "(.*?)" should be queued$/) do |filename|
-  Resque.should_receive(:enqueue).with(Philbot::Destroyer, [filename]).once
+  Resque.should_receive(:enqueue).with(Philbot::Workers::Destroyer, [filename]).once
 end
 
 Then(/^the (\d+) byte file "(.*?)" should be uploaded$/) do |size, filename|
