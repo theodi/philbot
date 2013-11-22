@@ -27,6 +27,16 @@ Feature: Upload file on create
     REGGIE WATTS
     """
 
+  # Remote paths are screwy (it uploads just the file, without the parent dirs)
+  Scenario: Queue and upload with complete (relative) path
+    Given a directory named "watchme/"
+    Then the upload of file "subdir/file_03" should be queued
+    When the monitor is watching "watchme/"
+    And I write to "watchme/subdir/file_03" with:
+    """
+    MITCH HEDBERG
+    """
+    And I wait for the monitor to notice
+
   Scenario: Local paths are screwy (it tried to upload /home/odi/home/odi/some/file)
 
-  Scenario: Remote paths are screwy (it uploads just the file, without the parent dirs)
