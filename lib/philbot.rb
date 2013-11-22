@@ -9,6 +9,10 @@ require 'philbot/workers/destroyer'
 require 'philbot/providers/rackspace'
 
 module Philbot
+  def self.configure yaml = 'conf/philbot.yaml'
+    Philbot::Config.instance.configure yaml
+  end
+
   def self.run watchdir
     Philbot::Config.root = File.expand_path(watchdir)
 
