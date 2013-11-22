@@ -1,7 +1,10 @@
 require 'yaml'
+require 'singleton'
 
 module Philbot
   class Config
+    include Singleton
+
     def self.root
       @@root
     end
@@ -10,7 +13,7 @@ module Philbot
       @@root = value
     end
 
-    def initialize yaml_file = 'conf/philbot.yaml'
+    def configure yaml_file = 'conf/philbot.yaml'
       @yaml_file = yaml_file
 
       y = YAML.load File.open yaml_file
