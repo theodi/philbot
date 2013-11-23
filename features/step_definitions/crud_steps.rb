@@ -15,7 +15,7 @@ Then(/^the upload of file "(.*?)" should be queued (\d+) times$/) do |filename, 
 end
 
 When(/^I wait for the monitor to notice$/) do
-  sleep 1
+  sleep 2
 end
 
 Given(/^the upload of "(.*?)" has been queued$/) do |filename|
