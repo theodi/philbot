@@ -38,5 +38,12 @@ Feature: Upload file on create
     """
     And I wait for the monitor to notice
 
-  Scenario: Local paths are screwy (it tried to upload /home/odi/home/odi/some/file)
-
+  Scenario:  Queue file when created and do the right thing with trailing slash
+    Given a directory named "watchme/"
+    Then the upload of file "file_01" should be queued
+    When the monitor is watching "watchme/" including the trailing slash
+    And I write to "watchme/file_01" with:
+    """
+    RICHARD PRYOR
+    """
+    And I wait for the monitor to notice

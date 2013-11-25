@@ -2,6 +2,10 @@ When(/^the monitor is watching "(.*?)"$/) do |directory|
   Philbot.run full_path(directory)
 end
 
+When(/^the monitor is watching "(.*?)" including the trailing slash$/) do |directory|
+  Philbot.run full_path(directory) + "/"
+end
+
 Then(/^the upload of file "(.*?)" should( not)? be queued$/) do |filename, boolean|
   if boolean
     Resque.should_not_receive(:enqueue).with(Philbot::Workers::Uploader, [filename])
