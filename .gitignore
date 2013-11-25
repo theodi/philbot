@@ -18,3 +18,5 @@ tmp
 
 .idea/
 conf/philbot.yaml
+cookbooks
+.vagrant
