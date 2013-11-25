@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'resque-mock', '~> 0.1'
   spec.add_development_dependency 'coveralls', '~> 0.7'
   spec.add_development_dependency 'unf', '~> 0.1'
+  spec.add_development_dependency 'librarian-chef'
 end
