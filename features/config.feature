@@ -24,8 +24,8 @@ Feature: Generate a config object
     """
     username:  some_other_name
     """
-#    Then looking up "username" on the object should yield "some_other_name"
-#    When I wait for the monitor to notice
+   # Then looking up "username" on the object should yield "some_other_name"
+   # When I wait for the monitor to notice
 
 
 
