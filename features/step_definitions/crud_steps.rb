@@ -1,8 +1,8 @@
-When(/^the monitor is watching "(.*?)"$/) do |directory|
+When(/^the share monitor is watching "(.*?)"$/) do |directory|
   Philbot::Monitors::ShareMonitor.run full_path(directory)
 end
 
-When(/^the monitor is watching "(.*?)" including the trailing slash$/) do |directory|
+When(/^the share monitor is watching "(.*?)" including the trailing slash$/) do |directory|
   Philbot::Monitors::ShareMonitor.run full_path(directory) + "/"
 end
 
