@@ -16,16 +16,17 @@ Feature: Generate a config object
 
   Scenario: Config object should be a singleton
 
-  Scenario: Config should reconfigure itself when config file changes
-    Given a dummy config object
-    Then looking up "username" on the object should yield "fake_philbot_user"
+#  Scenario: Config should reconfigure itself when config file changes
+#    Given a dummy config object
+#    When the admin monitor is watching "conf/"
+#    Then looking up "username" on the object should yield "fake_philbot_user"
 
-    Given a file named "conf/philbot.yaml" with:
-    """
-    username:  some_other_name
-    """
-   # Then looking up "username" on the object should yield "some_other_name"
-   # When I wait for the monitor to notice
+#    Given a file named "conf/philbot.yaml" with:
+#    """
+#    username:  some_other_name
+#    """
+#    Then looking up "username" on the object should yield "some_other_name"
+#    When I wait for the monitor to notice
 
 
 

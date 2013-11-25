@@ -1,9 +1,16 @@
-When(/^the share monitor is watching "(.*?)"$/) do |directory|
-  Philbot::Monitors::ShareMonitor.run full_path(directory)
-end
+#When(/^the (.*) monitor is watching "(.*?)"$/) do |monitor, directory|
+#  # I'm sure there's a way to extract this from the string
+#  Philbot::Monitors::ShareMonitor.run full_path(directory)
+#end
 
-When(/^the share monitor is watching "(.*?)" including the trailing slash$/) do |directory|
-  Philbot::Monitors::ShareMonitor.run full_path(directory) + "/"
+When(/^the (.*) monitor is watching "(.*?)"( including the trailing slash)?$/) do |monitor, directory, boolean|
+  trailing = ''
+  if boolean
+    trailing = '/'
+  end
+  s = 'Philbot::Monitors::%sMonitor' % monitor.capitalize
+  Kernel.const_get(s).run full_path(directory + trailing)
+#  Philbot::Monitors::ShareMonitor.run full_path(directory) + trailing
 end
 
 Then(/^the upload of file "(.*?)" should( not)? be queued$/) do |filename, boolean|

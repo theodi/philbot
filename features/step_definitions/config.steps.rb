@@ -20,3 +20,6 @@ Given(/^a dummy config object$/) do
   }
 end
 
+When(/^the admin monitor is watching "(.*?)"$/) do |directory|
+  Philbot::Monitors::AdminMonitor.run full_path(directory)
+end
