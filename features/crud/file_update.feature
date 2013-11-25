@@ -4,7 +4,7 @@ Feature: Upload file on change
   Scenario: Queue file when changed
     Given a directory named "watchme/"
     Then the upload of file "file_01" should be queued 2 times
-    When the monitor is watching "watchme/"
+    When the share monitor is watching "watchme/"
     Given a file named "watchme/file_01" with:
     """
     MORECAMBE

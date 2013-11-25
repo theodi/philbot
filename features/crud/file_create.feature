@@ -4,7 +4,7 @@ Feature: Upload file on create
   Scenario: Queue file when created
     Given a directory named "watchme/"
     Then the upload of file "file_01" should be queued
-    When the monitor is watching "watchme/"
+    When the share monitor is watching "watchme/"
     And I write to "watchme/file_01" with:
     """
     RICHARD PRYOR
@@ -21,7 +21,7 @@ Feature: Upload file on create
   Scenario: Dotfiles should not be uploaded
     Given a directory named "watchme/"
     Then the upload of file ".dot_file" should not be queued
-    When the monitor is watching "watchme/"
+    When the share monitor is watching "watchme/"
     And I write to "watchme/.dot_file" with:
     """
     REGGIE WATTS
@@ -31,7 +31,7 @@ Feature: Upload file on create
   Scenario: Dotfiles inside subdirs should not be uploaded
     Given a directory named "watchme/"
     Then the upload of file "subdir/.dot_file" should not be queued
-    When the monitor is watching "watchme/"
+    When the share monitor is watching "watchme/"
     And I write to "watchme/subdir/.dot_file" with:
     """
     LOUIS CK
@@ -41,7 +41,7 @@ Feature: Upload file on create
   Scenario: Queue and upload with complete (relative) path
     Given a directory named "watchme/"
     Then the upload of file "subdir/file_03" should be queued
-    When the monitor is watching "watchme/"
+    When the share monitor is watching "watchme/"
     And I write to "watchme/subdir/file_03" with:
     """
     MITCH HEDBERG
@@ -51,7 +51,7 @@ Feature: Upload file on create
   Scenario:  Queue file when created and do the right thing with trailing slash
     Given a directory named "watchme/"
     Then the upload of file "file_04" should be queued
-    When the monitor is watching "watchme/" including the trailing slash
+    When the share monitor is watching "watchme/" including the trailing slash
     And I write to "watchme/file_04" with:
     """
     GEORGE CARLIN

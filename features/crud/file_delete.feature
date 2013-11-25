@@ -4,7 +4,7 @@ Feature: Delete remote file on local delete
   Scenario: Delete remote file when deleted locally
     Given a directory named "watchme/"
     Then the upload of file "file_01" should be queued
-    When the monitor is watching "watchme/"
+    When the share monitor is watching "watchme/"
     And I write to "watchme/file_01" with:
     """
     BILL HICKS
