@@ -9,7 +9,12 @@ require 'philbot/workers/destroyer'
 require 'philbot/providers/rackspace'
 
 module Philbot
+  @@conffile = nil
+  @@confdir = nil
+
   def self.configure yaml = 'conf/philbot.yaml'
+    @@conffile = yaml
+    @@confdir  = File.dirname yaml
     Philbot::Config.instance.configure yaml
   end
 
@@ -30,20 +35,24 @@ module Philbot
       end
     end
     @@listener.start
+
+#    @@conflistener = Listen.to confdir do |m, a, r|
+#      unless m.empty?
+#        self.configure @@conffile
+#      end
+#    end
+
+#   @@conflistener.start
   end
 
   def self.mapit list, parentdir
     pd = parentdir.gsub(/\/$/, '')
-    list.delete_if { |i| File.basename(i)[0] == '.'}
-    list.map { |i| i.gsub('%s/' % pd, '')}
+    list.delete_if { |i| File.basename(i)[0] == '.' }
+    list.map { |i| i.gsub('%s/' % pd, '') }
   end
 
   def self.work
     worker = Resque::Worker.new '*'
     worker.work 5
-  end
-
-  def self.stop
-    #  @@listener.stop
   end
 end
