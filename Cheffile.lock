@@ -1,0 +1,40 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    build-essential (1.4.2)
+    chef-client (3.1.0)
+      cron (>= 1.2.0)
+      logrotate (>= 1.2.0)
+    chef_gem (0.1.0)
+    chef_handler (1.1.4)
+    cron (1.2.8)
+    dmg (2.0.8)
+    git (2.7.0)
+      build-essential (>= 0.0.0)
+      dmg (>= 0.0.0)
+      runit (>= 1.0.0)
+      windows (>= 0.0.0)
+      yum (>= 0.0.0)
+    logrotate (1.4.0)
+    runit (1.4.0)
+      build-essential (>= 0.0.0)
+      yum (>= 0.0.0)
+    samba (0.11.4)
+    windows (1.11.0)
+      chef_handler (>= 0.0.0)
+    yum (2.4.2)
+
+GIT
+  remote: https://github.com/fnichol/chef-rvm
+  ref: master
+  sha: 0cd320911c1e568cbf2eeac895a5ef06e5821589
+  specs:
+    rvm (0.9.1)
+      chef_gem (>= 0.0.0)
+
+DEPENDENCIES
+  chef-client (>= 0)
+  git (>= 0)
+  rvm (>= 0)
+  samba (>= 0)
+

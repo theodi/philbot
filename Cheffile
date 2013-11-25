@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'chef-client'
+cookbook 'git'
+cookbook 'rvm',
+   :git => 'https://github.com/fnichol/chef-rvm'
+cookbook 'samba'
