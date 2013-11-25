@@ -27,6 +27,15 @@ Feature: Upload file on create
     REGGIE WATTS
     """
 
+  Scenario: Dotfiles inside subdirs should not be uploaded
+    Given a directory named "watchme/"
+    Then the upload of file "subdir/.dot_file" should not be queued
+    When the monitor is watching "watchme/"
+    And I write to "watchme/subdir/.dot_file" with:
+    """
+    LOUIS CK
+    """
+
   Scenario: Queue and upload with complete (relative) path
     Given a directory named "watchme/"
     Then the upload of file "subdir/file_03" should be queued

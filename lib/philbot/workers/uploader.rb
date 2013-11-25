@@ -10,7 +10,6 @@ module Philbot
         filenames.each do |filename|
           unless filename[0] == '.'
             dir.files.create :key => filename, :body => File.open(File.join(Philbot::Config.root, filename))
-#          dir.files.create :key => filename, :body => File.open(File.join(filename))
           end
         end
       end
