@@ -7,6 +7,7 @@ require 'philbot/config'
 require 'philbot/workers/uploader'
 require 'philbot/workers/destroyer'
 require 'philbot/providers/rackspace'
+require 'philbot/monitors/share_monitor'
 
 module Philbot
   @@conffile = nil
