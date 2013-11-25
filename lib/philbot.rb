@@ -34,6 +34,7 @@ module Philbot
 
   def self.mapit list, parentdir
     pd = parentdir.gsub(/\/$/, '')
+    list.delete_if { |i| File.basename(i)[0] == '.'}
     list.map { |i| i.gsub('%s/' % pd, '')}
   end
 

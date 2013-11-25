@@ -26,6 +26,7 @@ Feature: Upload file on create
     """
     REGGIE WATTS
     """
+    And I wait for the monitor to notice
 
   Scenario: Dotfiles inside subdirs should not be uploaded
     Given a directory named "watchme/"
@@ -35,6 +36,7 @@ Feature: Upload file on create
     """
     LOUIS CK
     """
+    And I wait for the monitor to notice
 
   Scenario: Queue and upload with complete (relative) path
     Given a directory named "watchme/"
