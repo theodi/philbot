@@ -27,7 +27,6 @@ Feature: Upload file on create
     REGGIE WATTS
     """
 
-  # Remote paths are screwy (it uploads just the file, without the parent dirs)
   Scenario: Queue and upload with complete (relative) path
     Given a directory named "watchme/"
     Then the upload of file "subdir/file_03" should be queued
@@ -40,10 +39,10 @@ Feature: Upload file on create
 
   Scenario:  Queue file when created and do the right thing with trailing slash
     Given a directory named "watchme/"
-    Then the upload of file "file_01" should be queued
+    Then the upload of file "file_04" should be queued
     When the monitor is watching "watchme/" including the trailing slash
-    And I write to "watchme/file_01" with:
+    And I write to "watchme/file_04" with:
     """
-    RICHARD PRYOR
+    GEORGE CARLIN
     """
     And I wait for the monitor to notice
