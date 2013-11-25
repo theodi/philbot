@@ -33,8 +33,8 @@ module Philbot
   end
 
   def self.mapit list, parentdir
-    parentdir.gsub!(/\/$/, '')
-    list.map { |i| i.gsub('%s/' % parentdir, '')}
+    pd = parentdir.gsub(/\/$/, '')
+    list.map { |i| i.gsub('%s/' % pd, '')}
   end
 
   def self.work
