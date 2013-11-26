@@ -20,6 +20,7 @@ Feature: Generate a config object
     Given a dummy config object
     When the admin monitor is watching "conf/"
     Then looking up "username" on the object should yield "fake_philbot_user"
+    When I wait for the monitor to notice
 
     Given a file named "conf/philbot.yaml" with:
     """

@@ -29,7 +29,7 @@ end
 When(/^I wait for the monitor to notice$/) do
 #  seconds = 2
 #  seconds = count.to_i if defined? count
-  sleep 10
+  sleep 2
 end
 
 Given(/^the upload of "(.*?)" has been queued$/) do |filename|
