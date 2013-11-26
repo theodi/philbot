@@ -8,9 +8,9 @@ module Philbot
       def self.perform filenames
         dir = Philbot::Providers::Rackspace.new.dir
         filenames.each do |filename|
-          unless filename[0] == '.'
+       #   unless filename[0] == '.'
             dir.files.create :key => filename, :body => File.open(File.join(Philbot::Config.root, filename))
-          end
+       #   end
         end
       end
     end

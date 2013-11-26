@@ -17,6 +17,7 @@ module Philbot
       @yaml_file = yaml_file
 
       y = YAML.load File.open yaml_file
+#      puts ">>> CONFIGURING WITH %s <<<" % y
       @options = y
     end
 

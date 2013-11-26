@@ -25,11 +25,6 @@ module Philbot
         list.delete_if { |i| File.basename(i)[0] == '.' }
         list.map { |i| i.gsub('%s/' % pd, '') }
       end
-
-      def self.work
-        worker = Resque::Worker.new '*'
-        worker.work 5
-      end
     end
   end
 end
