@@ -12,7 +12,12 @@ require 'philbot/monitors/admin_monitor'
 
 module Philbot
   def self.configure yaml = 'conf/philbot.yaml'
-    Philbot::Config.instance.configure yaml
+     Philbot::Config.instance.configure yaml
+  end
+
+  def self.run watchdir, confdir
+    Philbot::Monitors::ShareMonitor.run watchdir
+#    Philbot::Monitors::AdminMonitor.run confdir
   end
 
   def self.work
