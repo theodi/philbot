@@ -11,12 +11,7 @@ require 'philbot/monitors/share_monitor'
 require 'philbot/monitors/admin_monitor'
 
 module Philbot
-  @@conffile = nil
-  @@confdir  = nil
-
   def self.configure yaml = 'conf/philbot.yaml'
-    @@conffile = yaml
-    @@confdir  = File.dirname yaml
     Philbot::Config.instance.configure yaml
   end
 
