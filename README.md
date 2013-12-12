@@ -14,7 +14,7 @@ Imagine [one of these](http://aws.amazon.com/storagegateway/), but for Rackspace
 
 ##Using it
 
-The following will build you a working Philbot appliance on an Ubuntu Vagrant VM. Assumptions:
+The following will build you a working Philbot appliance on an Ubuntu Precise Vagrant VM. Assumptions:
 
 * You have a Rackspace Cloudfiles account
 * You want to use a Cloudfiles container called _{bucket}_
@@ -24,7 +24,7 @@ The following will build you a working Philbot appliance on an Ubuntu Vagrant VM
 * You're going to mount this with a Mac
 * You want to Samba like it's 1999
 
-Cargo-cult at your own risk. So first, there's bunch of spadework to be done (Note: where you see things in {braces}, you actually have fill in stuff, copy 'n' paste won't work):
+Cargo-cult at your own risk. So first, there's bunch of spadework to be done (Note: where you see things in {braces}, you actually have fill in stuff, copy 'n' paste will lead to horrible consequences):
 
 ```
 sudo bash
@@ -107,17 +107,63 @@ echo "SHARE=/home/share/" > .env
 rvmsudo bundle exec foreman export -u {user} -a {user} upstart /etc/init
 ```
 
-Now start the service with `service philbot start` (or bounce the box again) and the magic should begin to happen: open a view on your Cloudfiles container (Cyberduck, web browser, remote viewing, whatever you got), then drop some more files in the _{my appliance}_ share and they should start to appear in Cloudfiles.
+Now start the service with `service philbot start` (or bounce the box again) and the magic should begin to happen: open a view on your Cloudfiles container (Cyberduck, web browser, remote viewing, whatever you got), then drop some more files in the _{my appliance}_ share and they should start to appear in Cloudfiles. Delete things locally, and they should start to be removed from Cloudfiles.
 
-##RasPi
-
-##Gotchas
+You are now Philbot-compliant.
 
 ##Roadmap
 
+We have plans for at least a couple of new features:
+
 ###Auto-configuration
 
+All Philbot really does is watch a directory (using the excellent [Listen](https://github.com/guard/listen) gem) for changes, and then queues jobs. So how about something like this:
+
+* We run a second share, containing (initially) a dummy config file
+* We mount the device over the network and edit this dummy file, filling in our actual Rackspace credentials
+* Philbot notices this change (because this is what he does) and places the file in the correct location
+* Suddenly, everything works
+
+There is already code to support this, but it didn't survive first contact with the Real World due to some encoding thing. This is going to get done, though.
+
+
 ###Cold storage
+
+At present, the Cloudfiles container stays in sync with the local storage. This is fine for now, but eventually even our 2TB USB drive is going to get full up. So here's the plan:
+
+* When we drop a (empty) file called _freeze_ or something into a local directory, that directory gets deleted locally _but the files remain at the other end_
+* We have some kind of index file at the root of the Cloudfiles container containing a list of frozen projects, which we can edit in order to unfreeze things (if this sounds a bit vague, that'll be because we've not really thought this but through yet, but it seems sensible)
+
+##Raspberry Pi
+
+When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the ODI office, connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!
+
+This path, however, is beset by bandits - Raspbian is based on Debian, which means:
+
+####No Upstart, because ${REASONS}
+
+I eventually gave up on attempting to get Foreman to do the Right Thing with things-that-are-not-Upstart (life is short, ya know?), put on the bamboo headphones and pasted this at the bottom of _/etc/inittab_:
+
+```
+PH01:4:respawn:/bin/su - philbot -c 'cd /home/philbot/philbot;export PORT=5000;bundle exec ruby bin/philbot /mnt/usb >> /var/log/philbot/philbot-1.log 2>&1'
+
+```
+
+which seems to work.
+
+####_smbpasswd_ not part of Samba install, also because ${REASONS}
+
+Not a big deal, but potentially frustrating. This command will fix it
+
+```
+sudo apt-get install samba-common-bin
+```
+
+and now you can add Samba users.
+
+###RasPi image
+
+The eventual plan is to publish a Raspbian-based SD-Card image which will work out a bunch of stuff, present itself for auto-configuration, and then Just Work.  
 
 ## Contributing
 
