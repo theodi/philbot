@@ -170,10 +170,11 @@ Are [here](https://github.com/theodi/philbot/issues/new). You got ideas, we wann
 
 ## Contributing
 
-We want your pull-requests! Take a fork, clone it and run the test suite
+We want your pull-requests! Take a fork, clone it and run the test suite (we use [Guard](https://github.com/guard/guard) for Super-Awesome Continuous Testing)
 
 ```
-rake
+bundle install
+bundle exec guard
 ```
 
 (Note: this will intermittently fail because testing asynchronous things is hard. Hmm, maybe you can help me fix this, too?)
