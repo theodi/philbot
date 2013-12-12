@@ -163,7 +163,7 @@ and now you can add Samba users.
 
 ###RasPi image
 
-The eventual plan is to publish a Raspbian-based SD-Card image which will work out a bunch of stuff, present itself for auto-configuration, and then Just Work.  
+The eventual plan is to publish a Raspbian-based SD-Card image which will work out a bunch o' stuff, present itself for auto-configuration, and then Just Work.  
 
 ## Contributing
 
