@@ -136,7 +136,7 @@ At present, the Cloudfiles container stays in sync with the local storage. This 
 
 ##Raspberry Pi
 
-When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the ODI office, connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!
+When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the [ODI office](http://theodi.org/360s/Office/office.html), connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!
 
 This path, however, is beset by bandits - Raspbian is based on Debian, which means:
 
@@ -165,10 +165,22 @@ and now you can add Samba users.
 
 The eventual plan is to publish a Raspbian-based SD-Card image which will work out a bunch o' stuff, present itself for auto-configuration, and then Just Work.  
 
+##Issues
+
+Are [here](https://github.com/theodi/philbot/issues/new). You got ideas, we wanna hear 'em.
+
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+We want your pull-requests! Take a fork, clone it and run the test suite
+
+```
+rake
+```
+
+(Note: this will intermittently fail because testing asynchronous things is hard)
+
+Then write some cukes and some code, and send us a PR!
+
+##License
+
+[MIT](http://theodi.mit-license.org/)
