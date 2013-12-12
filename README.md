@@ -176,7 +176,7 @@ We want your pull-requests! Take a fork, clone it and run the test suite
 rake
 ```
 
-(Note: this will intermittently fail because testing asynchronous things is hard)
+(Note: this will intermittently fail because testing asynchronous things is hard. Hmm, maybe you can help me fix this, too?)
 
 Then write some cukes and some code, and send us a PR!
 
