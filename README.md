@@ -18,26 +18,21 @@ _I copy and paste things I find on the Internet until it works_
 
 The following will build you a working Philbot appliance on an Ubuntu Vagrant VM. Assumptions:
 
+* You have a Rackspace Cloudfiles account
+* You want to use a Cloudfiles container called _philbot_
 * You want your local share to reside at _/home/share/_
 * You want the device to be show up on your network as _philbot_
 * You want to login as _philbot_ with password _philbot_
+* You're going to mount this with a Mac
+* You want to Samba like it's 1999
 
-Cargo-cult at your own risk:
+Cargo-cult at your own risk. So first, there's bunch of spadework to be done:
 
 ```
-sudo apt-get update
-sudo apt-get -y install curl git redis-server samba avahi-daemon
-sudo useradd -s /bin/bash -G admin -m philbot
-sudo su - philbot
-
-curl -sSL https://get.rvm.io | bash -s stable --ruby
-source ~/.rvm/scripts/rvm
-git clone https://github.com/theodi/philbot
-cd philbot/
-bundle install
-exit
-
 sudo bash
+apt-get update
+apt-get -y install curl git redis-server samba avahi-daemon
+useradd -s /bin/bash -G admin -m philbot
 mkdir -p /home/share
 chown nobody:nogroup /home/share
 ```
@@ -84,7 +79,47 @@ Now paste this into _/etc/avahi/services/smb.service_:
 </service-group>
 ```
 
+Restart samba and avahi (or just reboot the box) and you should now have a working samba server. It will advertise itself on yer network as _philbot_, and you'll be able to connect as _philbot/philbot_ and drop some files on it.
 
+Presuming this all works, then go create a Cloudfiles container called _philbot_ (using Cyberduck, the Web interface, magic spells, whatever), then configure the actual Philbot code:
+
+```
+sudo su - philbot
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+source ~/.rvm/scripts/rvm
+git clone https://github.com/theodi/philbot
+cd philbot/
+bundle install
+```
+
+Edit _conf/philbot.yaml_ so it looks like this:
+
+```
+provider:  Rackspace
+username:  somerackspacelogin
+api_key:   longstringoflettersandnumbers11
+region:    lon
+container: philbot
+```
+
+Then:
+
+```
+echo "SHARE=/home/share/" > .env
+rvmsudo bundle exec foreman export -u philbot -a philbot upstart /etc/init
+```
+
+Now start the service with `service philbot start` (or bounce the box again) and the magic should begin to happen: open a view on your Cloudfiles container (Cyberduck, web browser, remote viewing, whatever you got), then drop some more files in the _philbot_ share and they should start to appear in Cloudfiles.
+
+##RasPi
+
+##Gotchas
+
+##Roadmap
+
+###Auto-configuration
+
+###Cold storage
 
 ## Contributing
 
