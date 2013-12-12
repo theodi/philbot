@@ -146,7 +146,6 @@ I eventually gave up on attempting to get Foreman to do the Right Thing with thi
 
 ```
 PH01:4:respawn:/bin/su - philbot -c 'cd /home/philbot/philbot;export PORT=5000;bundle exec ruby bin/philbot /mnt/usb >> /var/log/philbot/philbot-1.log 2>&1'
-
 ```
 
 which seems to work.
