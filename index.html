@@ -1,70 +1,236 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Philbot by theodi</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <title>Philbot by theodi</title>
   </head>
+
   <body>
+    <div id="container">
+      <div class="inner">
 
-      <header>
-        <h1>Philbot</h1>
-        <p>Cloudfiles client</p>
-      </header>
+        <header>
+          <h1>Philbot</h1>
+          <h2>Cloudfiles client</h2>
+        </header>
 
-      <div id="banner">
-        <span id="logo"></span>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/theodi/philbot/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/theodi/philbot/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/theodi/philbot" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
-        <a href="https://github.com/theodi/philbot" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/theodi/philbot/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/theodi/philbot/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+        <hr>
 
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <p><a href="https://travis-ci.org/theodi/philbot"><img src="https://travis-ci.org/theodi/philbot.png?branch=master" alt="Build Status"></a>
+        <section id="main_content">
+          <p><a href="https://travis-ci.org/theodi/philbot"><img src="https://travis-ci.org/theodi/philbot.png?branch=master" alt="Build Status"></a>
+<a href="http://badge.fury.io/rb/philbot"><img src="https://badge.fury.io/rb/philbot.png" alt="Gem Version"></a>
 <a href="https://codeclimate.com/github/theodi/philbot"><img src="https://codeclimate.com/github/theodi/philbot.png" alt="Code Climate"></a>
-<a href="https://coveralls.io/r/theodi/philbot"><img src="https://coveralls.io/repos/theodi/philbot/badge.png" alt="Coverage Status"></a></p>
+<a href="https://coveralls.io/r/theodi/philbot"><img src="https://coveralls.io/repos/theodi/philbot/badge.png" alt="Coverage Status"></a>
+<a href="https://gemnasium.com/theodi/philbot"><img src="https://gemnasium.com/theodi/philbot.png" alt="Dependency Status"></a>
+<a href="http://theodi.mit-license.org/"><img src="http://img.shields.io/license/mit.png?color=green" alt="License"></a>
+<a href="http://hyperboleandahalf.blogspot.co.uk/2010/06/this-is-why-ill-never-be-adult.html"><img src="http://img.shields.io/things%20cleaned/all.png?color=green" alt="Things Cleaned"></a></p>
 
 <h1>
 <a name="philbot" class="anchor" href="#philbot"><span class="octicon octicon-link"></span></a>Philbot</h1>
 
-<p>Cloudfiles client</p>
+<p><em>Simple Cloudfiles client</em></p>
+
+<p>Imagine <a href="http://aws.amazon.com/storagegateway/">one of these</a>, but for Rackspace Cloudfiles</p>
+
+<h2>
+<a name="using-it" class="anchor" href="#using-it"><span class="octicon octicon-link"></span></a>Using it</h2>
+
+<p>The following will build you a working Philbot appliance on an Ubuntu Precise Vagrant VM. Assumptions:</p>
+
+<ul>
+<li>You have a Rackspace Cloudfiles account</li>
+<li>You want to use a Cloudfiles container called <em>{bucket}</em>
+</li>
+<li>You want your local share to reside at <em>/home/share/</em>
+</li>
+<li>You want the device to show up on your network as <em>{myappliance}</em>
+</li>
+<li>You want to login as <em>{user}</em> with password <em>{password}</em>
+</li>
+<li>You're going to mount this with a Mac</li>
+<li>You want to Samba like it's 1999</li>
+</ul><p>Cargo-cult at your own risk. So first, there's bunch of spadework to be done (Note: where you see things in {braces}, you actually have fill in stuff, copy 'n' paste will lead to horrible consequences):</p>
+
+<pre><code>sudo bash
+apt-get update
+apt-get -y install curl git redis-server samba avahi-daemon
+useradd -s /bin/bash -G admin -m {user}
+mkdir -p /home/share
+chown nobody:nogroup /home/share
+</code></pre>
+
+<p>Paste this over <em>/etc/samba/smb.conf</em>:</p>
+
+<pre><code>[global]
+  workgroup = {myappliance}
+  security = user
+  kernel oplocks = yes
+
+[{myappliance}]
+  comment = {myappliance}
+  path = /home/share
+  writeable = yes
+  guest ok = no
+</code></pre>
+
+<p>and do:</p>
+
+<pre><code>echo "{password}
+{password}" | smbpasswd -a -s {user}
+smbpasswd -e {password}
+</code></pre>
+
+<p>Now paste this into <em>/etc/avahi/services/smb.service</em>:</p>
+
+<pre><code>&lt;?xml version="1.0" standalone='no'?&gt;
+&lt;!DOCTYPE service-group SYSTEM "avahi-service.dtd"&gt;
+&lt;service-group&gt;
+ &lt;name replace-wildcards="yes"&gt;{myappliance}&lt;/name&gt;
+ &lt;service&gt;
+   &lt;type&gt;_smb._tcp&lt;/type&gt;
+   &lt;port&gt;445&lt;/port&gt;
+ &lt;/service&gt;
+ &lt;service&gt;
+   &lt;type&gt;_device-info._tcp&lt;/type&gt;
+   &lt;port&gt;0&lt;/port&gt;
+   &lt;txt-record&gt;model=RackMac&lt;/txt-record&gt;
+ &lt;/service&gt;
+&lt;/service-group&gt;
+</code></pre>
+
+<p>Restart samba and avahi (or just reboot the box) and you should now have a working samba server. It will advertise itself on yer network as <em>{my appliance}</em>, and you'll be able to connect as <em>{user}/{password}</em> and drop some files on it.</p>
+
+<p>Presuming this all works, then go create a Cloudfiles container called <em>{bucket}</em> (using Cyberduck, the Web interface, magic spells, whatever), then configure the actual Philbot code:</p>
+
+<pre><code>sudo su - {user}
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+source ~/.rvm/scripts/rvm
+git clone https://github.com/theodi/philbot
+cd philbot/
+bundle install
+</code></pre>
+
+<p>Edit <em>conf/philbot.yaml</em> so it looks like this:</p>
+
+<pre><code>provider:  Rackspace
+username:  somerackspacelogin
+api_key:   longstringoflettersandnumbers11
+region:    lon
+container: {bucket}
+</code></pre>
+
+<p>Then:</p>
+
+<pre><code>echo "SHARE=/home/share/" &gt; .env
+rvmsudo bundle exec foreman export -u {user} -a {user} upstart /etc/init
+</code></pre>
+
+<p>Now start the service with <code>service philbot start</code> (or bounce the box again) and the magic should begin to happen: open a view on your Cloudfiles container (Cyberduck, web browser, remote viewing, whatever you got), then drop some more files in the <em>{my appliance}</em> share and they should start to appear in Cloudfiles. Delete things locally, and they should start to be removed from Cloudfiles.</p>
+
+<p>You are now Philbot-compliant.</p>
+
+<h2>
+<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h2>
+
+<p>We have plans for at least a couple of new features:</p>
+
+<h3>
+<a name="auto-configuration" class="anchor" href="#auto-configuration"><span class="octicon octicon-link"></span></a>Auto-configuration</h3>
+
+<p>All Philbot really does is watch a directory (using the excellent <a href="https://github.com/guard/listen">Listen</a> gem) for changes, and then queues jobs. So how about something like this:</p>
+
+<ul>
+<li>We run a second share, containing (initially) a dummy config file</li>
+<li>We mount the device over the network and edit this dummy file, filling in our actual Rackspace credentials</li>
+<li>Philbot notices this change (because this is what he does) and places the file in the correct location</li>
+<li>Suddenly, everything works</li>
+</ul><p>There is already code to support this, but it didn't survive first contact with the Real World due to some encoding thing. This is going to get done, though.</p>
+
+<h3>
+<a name="cold-storage" class="anchor" href="#cold-storage"><span class="octicon octicon-link"></span></a>Cold storage</h3>
+
+<p>At present, the Cloudfiles container stays in sync with the local storage. This is fine for now, but eventually even our 2TB USB drive is going to get full up. So here's the plan:</p>
+
+<ul>
+<li>When we drop a (empty) file called <em>freeze</em> or something into a local directory, that directory gets deleted locally <em>but the files remain at the other end</em>
+</li>
+<li>We have some kind of index file at the root of the Cloudfiles container containing a list of frozen projects, which we can edit in order to unfreeze things (if this sounds a bit vague, that'll be because we've not really thought this but through yet, but it seems sensible)</li>
+</ul><h2>
+<a name="raspberry-pi" class="anchor" href="#raspberry-pi"><span class="octicon octicon-link"></span></a>Raspberry Pi</h2>
+
+<p>When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the <a href="http://theodi.org/360s/Office/office.html">ODI office</a>, connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!</p>
+
+<p>This path, however, is beset by bandits - Raspbian is based on Debian, which means:</p>
+
+<h4>
+<a name="no-upstart-because-reasons" class="anchor" href="#no-upstart-because-reasons"><span class="octicon octicon-link"></span></a>No Upstart, because ${REASONS}</h4>
+
+<p>I eventually gave up on attempting to get Foreman to do the Right Thing with things-that-are-not-Upstart (life is short, ya know?), put on the bamboo headphones and pasted this at the bottom of <em>/etc/inittab</em>:</p>
+
+<pre><code>PH01:4:respawn:/bin/su - philbot -c 'cd /home/philbot/philbot;export PORT=5000;bundle exec ruby bin/philbot /mnt/usb &gt;&gt; /var/log/philbot/philbot-1.log 2&gt;&amp;1'
+</code></pre>
+
+<p>which seems to work.</p>
+
+<h4>
+<a name="smbpasswd-not-part-of-samba-install-also-because-reasons" class="anchor" href="#smbpasswd-not-part-of-samba-install-also-because-reasons"><span class="octicon octicon-link"></span></a><em>smbpasswd</em> not part of Samba install, also because ${REASONS}</h4>
+
+<p>Not a big deal, but potentially frustrating. This command will fix it</p>
+
+<pre><code>sudo apt-get install samba-common-bin
+</code></pre>
+
+<p>and now you can add Samba users.</p>
+
+<h3>
+<a name="raspi-image" class="anchor" href="#raspi-image"><span class="octicon octicon-link"></span></a>RasPi image</h3>
+
+<p>The eventual plan is to publish a Raspbian-based SD-Card image which will work out a bunch o' stuff, present itself for auto-configuration, and then Just Work.  </p>
+
+<h2>
+<a name="issues" class="anchor" href="#issues"><span class="octicon octicon-link"></span></a>Issues</h2>
+
+<p>Are <a href="https://github.com/theodi/philbot/issues/new">here</a>. You got ideas, we wanna hear 'em.</p>
 
 <h2>
 <a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
-<ol>
-<li>Fork it</li>
-<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
-<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
-<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
-<li>Create new Pull Request</li>
-</ol>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/theodi">theodi</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
+<p>We want your pull-requests! Take a fork, clone it and run the test suite</p>
+
+<pre><code>rake
+</code></pre>
+
+<p>(Note: this will intermittently fail because testing asynchronous things is hard)</p>
+
+<p>Then write some cukes and some code, and send us a PR!</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="http://theodi.mit-license.org/">MIT</a></p>
+        </section>
+
+        <footer>
+          Philbot is maintained by <a href="https://github.com/theodi">theodi</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
   </body>
 </html>
