@@ -14,25 +14,23 @@ Imagine [one of these](http://aws.amazon.com/storagegateway/), but for Rackspace
 
 ##Using it
 
-_I copy and paste things I find on the Internet until it works_
-
 The following will build you a working Philbot appliance on an Ubuntu Vagrant VM. Assumptions:
 
 * You have a Rackspace Cloudfiles account
-* You want to use a Cloudfiles container called _philbot_
+* You want to use a Cloudfiles container called _{bucket}_
 * You want your local share to reside at _/home/share/_
-* You want the device to be show up on your network as _philbot_
-* You want to login as _philbot_ with password _philbot_
+* You want the device to show up on your network as _{myappliance}_
+* You want to login as _{user}_ with password _{password}_
 * You're going to mount this with a Mac
 * You want to Samba like it's 1999
 
-Cargo-cult at your own risk. So first, there's bunch of spadework to be done:
+Cargo-cult at your own risk. So first, there's bunch of spadework to be done (Note: where you see things in {braces}, you actually have fill in stuff, copy 'n' paste won't work):
 
 ```
 sudo bash
 apt-get update
 apt-get -y install curl git redis-server samba avahi-daemon
-useradd -s /bin/bash -G admin -m philbot
+useradd -s /bin/bash -G admin -m {user}
 mkdir -p /home/share
 chown nobody:nogroup /home/share
 ```
@@ -41,12 +39,12 @@ Paste this over _/etc/samba/smb.conf_:
 
 ```
 [global]
-  workgroup = philbot
+  workgroup = {myappliance}
   security = user
   kernel oplocks = yes
 
-[philbot]
-  comment = philbot
+[{myappliance}]
+  comment = {myappliance}
   path = /home/share
   writeable = yes
   guest ok = no
@@ -55,9 +53,9 @@ Paste this over _/etc/samba/smb.conf_:
 and do:
 
 ```
-echo "philbot
-philbot" | smbpasswd -a -s philbot
-smbpasswd -e philbot
+echo "{password}
+{password}" | smbpasswd -a -s {user}
+smbpasswd -e {password}
 ```
 
 Now paste this into _/etc/avahi/services/smb.service_:
@@ -66,7 +64,7 @@ Now paste this into _/etc/avahi/services/smb.service_:
 <?xml version="1.0" standalone='no'?>
 <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
 <service-group>
- <name replace-wildcards="yes">philbot</name>
+ <name replace-wildcards="yes">{myappliance}</name>
  <service>
    <type>_smb._tcp</type>
    <port>445</port>
@@ -79,12 +77,12 @@ Now paste this into _/etc/avahi/services/smb.service_:
 </service-group>
 ```
 
-Restart samba and avahi (or just reboot the box) and you should now have a working samba server. It will advertise itself on yer network as _philbot_, and you'll be able to connect as _philbot/philbot_ and drop some files on it.
+Restart samba and avahi (or just reboot the box) and you should now have a working samba server. It will advertise itself on yer network as _{my appliance}_, and you'll be able to connect as _{user}/{password}_ and drop some files on it.
 
-Presuming this all works, then go create a Cloudfiles container called _philbot_ (using Cyberduck, the Web interface, magic spells, whatever), then configure the actual Philbot code:
+Presuming this all works, then go create a Cloudfiles container called _{bucket}_ (using Cyberduck, the Web interface, magic spells, whatever), then configure the actual Philbot code:
 
 ```
-sudo su - philbot
+sudo su - {user}
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 git clone https://github.com/theodi/philbot
@@ -99,17 +97,17 @@ provider:  Rackspace
 username:  somerackspacelogin
 api_key:   longstringoflettersandnumbers11
 region:    lon
-container: philbot
+container: {bucket}
 ```
 
 Then:
 
 ```
 echo "SHARE=/home/share/" > .env
-rvmsudo bundle exec foreman export -u philbot -a philbot upstart /etc/init
+rvmsudo bundle exec foreman export -u {user} -a {user} upstart /etc/init
 ```
 
-Now start the service with `service philbot start` (or bounce the box again) and the magic should begin to happen: open a view on your Cloudfiles container (Cyberduck, web browser, remote viewing, whatever you got), then drop some more files in the _philbot_ share and they should start to appear in Cloudfiles.
+Now start the service with `service philbot start` (or bounce the box again) and the magic should begin to happen: open a view on your Cloudfiles container (Cyberduck, web browser, remote viewing, whatever you got), then drop some more files in the _{my appliance}_ share and they should start to appear in Cloudfiles.
 
 ##RasPi
 
