@@ -22,7 +22,7 @@ The following will build you a working Philbot appliance on an Ubuntu Precise Va
 * You want the device to show up on your network as _{myappliance}_
 * You want to login as _{user}_ with password _{password}_
 * You're going to mount this with a Mac
-* You want to Samba like it's 1999
+* You want to [Samba](http://www.samba.org/) like it's 1999
 
 Cargo-cult at your own risk. So first, there's bunch of spadework to be done (Note: where you see things in {braces}, you actually have fill in stuff, copy 'n' paste will lead to horrible consequences):
 
