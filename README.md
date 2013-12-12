@@ -41,7 +41,7 @@ Paste this over _/etc/samba/smb.conf_:
 
 ```
 [global]
-  workgroup = filbot
+  workgroup = philbot
   security = user
   kernel oplocks = yes
 
