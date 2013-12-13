@@ -136,6 +136,7 @@ At present, the Cloudfiles container stays in sync with the local storage. This 
 
 ##Raspberry Pi
 
+[![The Actual Philbot](http://farm4.staticflickr.com/3807/11359480634_0829c3ddc9_z.jpg)](http://www.flickr.com/photos/pikesley/11359480634/lightbox/)
 When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the [ODI office](http://theodi.org/360s/Office/office.html), connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!
 
 This path, however, is beset by bandits - Raspbian is based on Debian, which means:
