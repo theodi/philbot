@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Philbot by theodi</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Philbot : Cloudfiles Appliance" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Philbot</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Philbot</h1>
-          <h2>Cloudfiles Appliance</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/theodi/philbot">View on GitHub</a>
+
+          <h1 id="project_title">Philbot</h1>
+          <h2 id="project_tagline">Cloudfiles Appliance</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/theodi/philbot/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/theodi/philbot/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/theodi/philbot/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/theodi/philbot/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/theodi/philbot" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <p><a href="https://travis-ci.org/theodi/philbot"><img src="https://travis-ci.org/theodi/philbot.png?branch=master" alt="Build Status"></a>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="https://travis-ci.org/theodi/philbot"><img src="https://travis-ci.org/theodi/philbot.png?branch=master" alt="Build Status"></a>
 <a href="http://badge.fury.io/rb/philbot"><img src="https://badge.fury.io/rb/philbot.png" alt="Gem Version"></a>
 <a href="https://codeclimate.com/github/theodi/philbot"><img src="https://codeclimate.com/github/theodi/philbot.png" alt="Code Climate"></a>
 <a href="https://coveralls.io/r/theodi/philbot"><img src="https://coveralls.io/repos/theodi/philbot/badge.png" alt="Coverage Status"></a>
@@ -44,7 +44,7 @@
 
 <p><em>Simple Cloudfiles client</em></p>
 
-<p>Imagine <a href="http://aws.amazon.com/storagegateway/">one of these</a>, but for Rackspace Cloudfiles</p>
+<p>Like an <a href="http://aws.amazon.com/storagegateway/">Amazon Storage Gateway</a>, but for Rackspace Cloudfiles. It shows up on your network, you drop your files on it, they find their way to the Cloud.</p>
 
 <h2>
 <a name="using-it" class="anchor" href="#using-it"><span class="octicon octicon-link"></span></a>Using it</h2>
@@ -172,7 +172,8 @@ rvmsudo bundle exec foreman export -u {user} -a {user} upstart /etc/init
 </ul><h2>
 <a name="raspberry-pi" class="anchor" href="#raspberry-pi"><span class="octicon octicon-link"></span></a>Raspberry Pi</h2>
 
-<p>When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the <a href="http://theodi.org/360s/Office/office.html">ODI office</a>, connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!</p>
+<p><a href="http://www.flickr.com/photos/pikesley/11359480634/lightbox/"><img src="http://farm4.staticflickr.com/3807/11359480634_0829c3ddc9_z.jpg" alt="The Actual Philbot"></a>
+When we were designing this, the target was always to put it onto a Raspberry Pi. We have this running right now on a Pi in the <a href="http://theodi.org/360s/Office/office.html">ODI office</a>, connected to a 2TB external USB drive, which gives us a self-contained Cloudfiles appliance for less than a hundred quid!</p>
 
 <p>This path, however, is beset by bandits - Raspbian is based on Debian, which means:</p>
 
@@ -223,15 +224,18 @@ bundle exec guard
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p><a href="http://theodi.mit-license.org/">MIT</a></p>
-        </section>
-
-        <footer>
-          Philbot is maintained by <a href="https://github.com/theodi">theodi</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Philbot maintained by <a href="https://github.com/theodi">theodi</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
