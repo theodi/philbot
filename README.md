@@ -10,7 +10,7 @@
 
 _Simple Cloudfiles client_
 
-Imagine [one of these](http://aws.amazon.com/storagegateway/), but for Rackspace Cloudfiles
+Like an [Amazon Storage Gateway](http://aws.amazon.com/storagegateway/), but for Rackspace Cloudfiles. It shows up on your network, you drop your files on it, they find their way to the Cloud.
 
 ##Using it
 
