@@ -132,7 +132,7 @@ There is already code to support this, but it didn't survive first contact with 
 At present, the Cloudfiles container stays in sync with the local storage. This is fine for now, but eventually even our 2TB USB drive is going to get full up. So here's the plan:
 
 * When we drop a (empty) file called _freeze_ or something into a local directory, that directory gets deleted locally _but the files remain at the other end_
-* We have some kind of index file at the root of the Cloudfiles container containing a list of frozen projects, which we can edit in order to unfreeze things (if this sounds a bit vague, that'll be because we've not really thought this but through yet, but it seems sensible)
+* We have some kind of index file at the root of the Cloudfiles container containing a list of frozen projects, which we can edit in order to unfreeze things (if this sounds a little vague, that'll be because we've not really thought this bit through yet, but it seems reasonable)
 
 ##Raspberry Pi
 
