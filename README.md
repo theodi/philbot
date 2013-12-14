@@ -167,7 +167,7 @@ The eventual plan is to publish a Raspbian-based SD-Card image which will work o
 
 ##Issues
 
-Are [here](https://github.com/theodi/philbot/issues/new). You got ideas, we wanna hear 'em.
+Are [here](https://github.com/theodi/philbot/issues/). You got ideas, we wanna hear 'em.
 
 ## Contributing
 
