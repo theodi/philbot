@@ -1,36 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Philbot : Cloudfiles Appliance" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Philbot by theodi</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Philbot</title>
   </head>
-
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/theodi/philbot">View on GitHub</a>
+      <header>
+        <h1>Philbot</h1>
+        <p>Cloudfiles Appliance</p>
+      </header>
 
-          <h1 id="project_title">Philbot</h1>
-          <h2 id="project_tagline">Cloudfiles Appliance</h2>
+      <div id="banner">
+        <span id="logo"></span>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/theodi/philbot/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/theodi/philbot/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <a href="https://github.com/theodi/philbot" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/theodi/philbot/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/theodi/philbot/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
         <p><a href="https://travis-ci.org/theodi/philbot"><img src="https://travis-ci.org/theodi/philbot.png?branch=master" alt="Build Status"></a>
 <a href="http://badge.fury.io/rb/philbot"><img src="https://badge.fury.io/rb/philbot.png" alt="Gem Version"></a>
 <a href="https://codeclimate.com/github/theodi/philbot"><img src="https://codeclimate.com/github/theodi/philbot.png" alt="Code Climate"></a>
@@ -205,7 +213,7 @@ When we were designing this, the target was always to put it onto a Raspberry Pi
 <h2>
 <a name="issues" class="anchor" href="#issues"><span class="octicon octicon-link"></span></a>Issues</h2>
 
-<p>Are <a href="https://github.com/theodi/philbot/issues/new">here</a>. You got ideas, we wanna hear 'em.</p>
+<p>Are <a href="https://github.com/theodi/philbot/issues/">here</a>. You got ideas, we wanna hear 'em.</p>
 
 <h2>
 <a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
@@ -225,17 +233,12 @@ bundle exec guard
 
 <p><a href="http://theodi.mit-license.org/">MIT</a></p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Philbot maintained by <a href="https://github.com/theodi">theodi</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/theodi">theodi</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>
