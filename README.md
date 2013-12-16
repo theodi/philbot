@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/theodi/philbot.png?branch=master)](https://travis-ci.org/theodi/philbot)
+[![Dependency Status](https://gemnasium.com/theodi/philbot.png)](https://gemnasium.com/theodi/philbot)
 [![Gem Version](https://badge.fury.io/rb/philbot.png)](http://badge.fury.io/rb/philbot)
 [![Code Climate](https://codeclimate.com/github/theodi/philbot.png)](https://codeclimate.com/github/theodi/philbot)
 [![Coverage Status](https://coveralls.io/repos/theodi/philbot/badge.png)](https://coveralls.io/r/theodi/philbot)
