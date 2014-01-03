@@ -182,6 +182,13 @@ bundle exec guard
 
 Then write some cukes and some code, and send us a PR!
 
+## Additional reading
+
+This guide only covers setting up the philbot service. Here are some additional guides you may find useful:
+
+- [Connecting a USB hard drive to a raspberry pi](http://raspberrywebserver.com/serveradmin/connect-your-raspberry-pi-to-a-USB-hard-disk.html)
+- [Mounting to a directory](http://www.tldp.org/HOWTO/Hard-Disk-Upgrade/mount.html)
+
 ##License
 
 [MIT](http://theodi.mit-license.org/)
