@@ -29,7 +29,7 @@ Cargo-cult at your own risk. So first, there's bunch of spadework to be done (No
 ```
 sudo bash
 apt-get update
-apt-get -y install curl git redis-server samba avahi-daemon
+apt-get -y install curl git redis-server samba samba-common-bin avahi-daemon
 useradd -s /bin/bash -G admin -m {user}
 mkdir -p /home/share
 chown nobody:nogroup /home/share
